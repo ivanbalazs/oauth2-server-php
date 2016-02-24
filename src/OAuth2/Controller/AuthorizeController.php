@@ -94,6 +94,9 @@ class AuthorizeController implements AuthorizeControllerInterface
         if (empty($redirect_uri) && !empty($registered_redirect_uri)) {
             $redirect_uri = $registered_redirect_uri;
         }
+        if ($request->query->has('_real_redirect_uri')) {
+            $redirect_uri = $request->query->get('_real_redirect_uri');
+        }
 
         $uri = $this->buildUri($redirect_uri, $uri_params);
 
